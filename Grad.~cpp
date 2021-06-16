@@ -1,0 +1,36 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "Grad.h"
+#include "ImageBase.h"
+
+//---------------------------------------------------------------------------
+
+#pragma package(smart_init)
+FourFunction(ImageBase Im,float **FourC,int Size)//Заполнение изображения косинусным рядом с коэф. FourC,
+                                                 // Size-размерность массива
+{
+ int i,j,n,m;
+ for(i=0;i<Im.ImageSizeY;i++)
+    {
+     for(j=0;j<Im.ImageSizeX;j++)
+        {
+         Im.ImageComplex[i][j] = polar((float)1.,(float)M_PI/2);
+        }
+    }
+ for(n=1;n<=Size;n++)
+    {
+     for(m=1;m<=Size;m++)
+        {
+         for(i=0;i<Im.ImageSizeY;i++)
+            {
+             for(j=0;j<Im.ImageSizeX;j++)
+                {
+                 Im.ImageComplex[i][j] += cos((2*M_PI*i*n)/Size)*cos((2*M_PI*j*m)/Size);
+                }
+            }
+        }
+    }
+}

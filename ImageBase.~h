@@ -1,0 +1,49 @@
+//---------------------------------------------------------------------------
+
+#ifndef ImageBaseH
+#define ImageBaseH
+//---------------------------------------------------------------------------
+#include "complex.h"
+#endif
+class ImageBase
+     {
+      private:
+      int NearestSize();//Вычисление ближайшего числа кратного степени двойки
+      int fft1d (complex<double> *arr,int Size,int c);//Одномерное преобразование Фурье
+
+      public:
+      float Energy();//Вычисляет среднее значение квадрата изображения
+      float Max();//Вычисляет максимальное значение модуля изображения
+      int SizeImageX;//Размер изображения по горизонтали
+      int SizeImageY;//Размер изображения по вертикали
+      int Zeros;//Дополнение нулями
+      unsigned char **Image;//Изображение
+      ReadFile(unsigned char *FileName);//Чтение изображения из файла
+      WriteFile(char *FileName,int q);//Запись изображения в файл
+      complex <float> **ImageComplex;//Комплексное изображение
+      ImageBase & operator = (ImageBase & c);//Оператор присваивания
+      ImageBase & operator + (ImageBase & c);//Оператор сложения
+      ImageBase & operator * (ImageBase & c);//Оператор умножения
+      ImageBase & operator - (ImageBase & c);//Оператор вычитания
+      ImageBase & operator / (ImageBase & c);//Оператор деления
+      Value(complex<float> Val);//Присвоение всему комплексному массиву значения complex<float> Val
+      Norm();//Нормировка комплексного изображения на 1
+      Crushing(int q);//Дробление изображения в q раз
+      void fft(int c);//Двумерное преобразование Фурье
+      frt2Dz (float Rx,float Ry,float Z,float Kw,int q);//Преобразование Френеля
+      IKG(float Rx,float Ry,float Z,float Kw);//Интеграл Кирхгофа
+      IKG_(float Rx,float Ry,float Z,float Kw,int n);//Интеграл Кирхгофа составной
+      ViewImage(TImage *ImageT,float inc);//Вывод на форму изображения
+      ViewImage_(TImage *ImageT);//Вывод на форму изображения по размеру
+      ViewImageComplex(TImage *Image,int q,float inc,float F_dec);//Вывод на форму комплексного изображения
+      ViewImageComplex_(TImage *Image,int q,float inc,float F_dec);//Вывод на форму комплексного изображения по размеру
+      CenterCat(int R);//Вырезать центр изображения
+      FourFunction(float **FourC,int Size);//Заполнение изображения косинусным рядом с коэф. FourC,
+                                                 // Size-размерность массива
+      float MomImageComplex(int n);//Определение момента светового поля
+      float EMomImageComplex(int n);//Определение момента светового поля
+      ImageBase(int SX,int SY);
+      ~ImageBase();
+     };
+ReadBMPFile(unsigned char *FileName,int &X,int &Y);//Чтение заголовка BMP файла
+
